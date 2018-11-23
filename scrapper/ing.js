@@ -17,17 +17,19 @@ var scraper = {
             $("tr").each(function(index, tr){
                 var single = []
                 $(this).children("td").each(function(index, td){
-                    single.push($(this).text())
+                    td = $(td).text()
+                    td = td.replace(/,/g, ".");
+                    single.push(td)
                 })
                 ings.push(single)
             })
             ings.forEach(function(ing) {
                 Ingredient.create({
                     name: ing[0],
-                    cal: parseInt(ing[1]),
-                    protein: parseInt(ing[2]),
-                    fat: parseInt(ing[3]),
-                    carb: parseInt(ing[4]),
+                    cal: ing[1],
+                    protein: ing[2],
+                    fat: ing[3],
+                    carb: ing[4],
                 }, function(err, created) {
                     if(err) {
                         console.log(err)
