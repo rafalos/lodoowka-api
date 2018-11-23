@@ -18,6 +18,20 @@ router.get('/ingredient/:id', function(req, res) {
   })
 })
 
+router.put('/ingredient/:id', function(req, res) {
+  Ingredient.findByIdAndUpdate(req.params.id, req.body,{new: true}, function(err, ingredient) {
+    if(err) {
+      console.log(err)
+    } else {
+      console.log(ingredient)
+      ingredient.save()
+      res.json({
+        ingredient
+      })
+    }
+  })
+})
+
 router.get('/ingredients', function(req, res) {
   Ingredient.find({}, function(err, ingredients) {
     res.json({
