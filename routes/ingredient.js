@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
     })
   })
 
-router.get('/ingredient/:id', function(req, res) {
+router.get('/:id', function(req, res) {
     Ingredient.findById(req.params.id, function(err, ingredient) {
       if(err) {
         console.log(err)
@@ -22,7 +22,7 @@ router.get('/ingredient/:id', function(req, res) {
     })
   })
   
-  router.put('/ingredient/:id', function(req, res) {
+  router.put('/:id', function(req, res) {
     Ingredient.findByIdAndUpdate(req.params.id, req.body,{new: true}, function(err, ingredient) {
       if(err) {
         console.log(err)
