@@ -1,4 +1,5 @@
 var express = require('express');
+const request = require('request');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -12,7 +13,15 @@ var tagRouter = require('./routes/tag');
 var recipeRouter = require('./routes/recipe');
 var bodyParser = require('body-parser')
 var app = express();
+var cron = require('node-cron');
 var cors = require("cors")
+cron.schedule('* * * * *', () => {
+  request('http://loodowka-api.herokuapp.com/recipes', function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log("asked")
+        }
+    })
+});
 app.use(cors({
     'allowedHeaders': ['sessionId', 'Content-Type'],
     'exposedHeaders': ['sessionId'],
