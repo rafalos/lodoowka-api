@@ -5,7 +5,10 @@ var recipeSchema = mongoose.Schema({
     category: { type : mongoose.Schema.Types.ObjectId, ref: 'Category' },
     difficulty: Number,
     time: Number,
-    ingredients: [{ type : mongoose.Schema.Types.ObjectId, ref: 'Ingredient' }],
+    ingredients: [{
+      ingredient: { type : mongoose.Schema.Types.ObjectId, ref: 'Ingredient' },
+      weight: Number
+    }],
     tags: [{ type : mongoose.Schema.Types.ObjectId, ref: 'Tag' }],
     steps: [],
     images: []

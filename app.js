@@ -12,9 +12,13 @@ var categoryRouter = require('./routes/category');
 var tagRouter = require('./routes/tag');
 var recipeRouter = require('./routes/recipe');
 var bodyParser = require('body-parser')
+const history = require('connect-history-api-fallback');
 var app = express();
 var cron = require('node-cron');
 var cors = require("cors")
+app.use(history({
+    index: '/'
+  }));
 cron.schedule('* * * * *', () => {
   request('http://loodowka-api.herokuapp.com/recipes', function(error, response, body) {
         if (!error && response.statusCode == 200) {
